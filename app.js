@@ -11,8 +11,31 @@ function updateProductQuantity(product, price, isIncrise){
 
     // update product price 
     const productPriceInput = document.getElementById(product + '-total');
-    const productPrice = parseInt(productPriceInput.innerText);
     productPriceInput.innerText = productNumber * price;
+
+    //calculate total price
+    priceCalculate();
+}
+
+//product input value
+function getProductInput(product){
+    const productInput = document.getElementById(product + '-number');
+    const productNumber = parseInt(productInput.value);
+    return productNumber;
+}
+
+//total price calculate
+function priceCalculate(){
+    const caseTotal = getProductInput('case') * 59;
+    const phoneTotal = getProductInput('phone') * 1219;
+    const subTotal = caseTotal + phoneTotal;
+    const taxAmount = subTotal / 10;
+    const totalPrice = subTotal + taxAmount;
+
+    //update html element
+    document.getElementById('sub-total').innerText = subTotal;
+    document.getElementById('tax-amount').innerText = taxAmount;
+    document.getElementById('total-price').innerText = totalPrice; 
 }
 
 //phone handler plus and minus
